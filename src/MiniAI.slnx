@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MiniAI.Api/MiniAI.Api.csproj" />
+  <Project Path="MiniAI.Application/MiniAI.Application.csproj" />
+  <Project Path="MiniAI.Domain/MiniAI.Domain.csproj" />
+  <Project Path="MiniAI.Infrastructure/MiniAI.Infrastructure.csproj" />
+</Solution>
