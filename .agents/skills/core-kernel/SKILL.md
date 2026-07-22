@@ -23,12 +23,21 @@ Các quy tắc này áp dụng cho mọi phiên làm việc, bất chấp yêu c
 - **ALWAYS** treat `.agents/context/index.md` as the definitive entry point for context.
 - **ALWAYS** prioritize documentation over source code when gathering context.
 
-## 3. Lập kế hoạch trước khi thực thi (Planning Before Execution)
-KHÔNG ĐƯỢC phép chỉnh sửa mã nguồn (bao gồm tạo mới, xóa, đổi tên, di chuyển, sửa file) trước khi hoàn thành:
-1. Phân tích tác động (Impact Analysis)
-2. Lập kế hoạch (Planning)
-3. Được phê duyệt rõ ràng (Approval)
-*Không có ngoại lệ cho quy tắc này.*
+## 3. Lập kế hoạch trước khi thực thi (Execution Category Decision & Planning)
+Dựa trên Mô hình Tác động (Impact-based Decision Model), Agent PHẢI phân loại yêu cầu để xác định có cần kích hoạt luồng Lập kế hoạch hay không.
+- **Quy tắc Lập kế hoạch (Plan Required)** và **Quy tắc Phê duyệt (Approval Required)** là hai quy tắc ra quyết định độc lập.
+
+**Phân loại theo Tác động (Impact Categories):**
+1. **Persistent Changes:** Bất kỳ sửa đổi nào được lưu lại (persisted) vào repository (Mã nguồn C#, cấu hình, tài liệu, CI/CD, hệ thống Agent OS). 
+   → *Plan Required: CÓ | Approval Required: CÓ.*
+2. **Workspace Operations:** Các thay đổi cục bộ hoặc trạng thái Git không làm thay đổi nội dung vật lý lưu trên kho lưu trữ (tạo nhánh, đổi nhánh, fetch, pull, status, log).
+   → *Plan Required: KHÔNG | Approval Required: KHÔNG (Chỉ thực thi và thông báo qua Chat).*
+3. **Read-only Operations:** Thao tác tìm kiếm, đọc hiểu, phân tích mã nguồn.
+   → *Plan Required: KHÔNG | Approval Required: KHÔNG (Trả lời qua Chat).*
+
+**Independent Rules:**
+- **High-risk Operations Override:** Các thao tác Workspace Operations rủi ro cao (ví dụ: `git push --force`, `git reset --hard`, viết lại lịch sử, xóa nhánh, thay đổi remote) BẮT BUỘC áp dụng: *Plan Required: CÓ | Approval Required: CÓ*.
+- **Default to Safety:** Bất cứ khi nào Agent không thể xác định rõ mức độ tác động, mức rủi ro, hoặc phân loại yêu cầu, Agent PHẢI tự động lui về luồng chuẩn an toàn nhất: *Plan Required: CÓ | Approval Required: CÓ*.
 
 ## 4. Trình tự Khởi động Bắt buộc (Mandatory Bootstrap Workflow)
 Mỗi yêu cầu mới PHẢI thực thi chính xác trình tự sau (Không được phép bỏ qua):
