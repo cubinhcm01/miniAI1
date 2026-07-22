@@ -98,19 +98,59 @@ Agent KHÔNG ĐƯỢC tự ý chọn, phải tuân theo sơ đồ sau:
 7. Destroy (Archived / Destroyed)
 
 ## 10. Artifact Template Registry & Metadata
-Tất cả Artifact phải bắt đầu bằng khối **Metadata** chuẩn:
+Mọi Artifact (Implementation Plan, Implementation Result, Architecture Review, Design Proposal, Refactoring Proposal, Completion Summary, v.v.) phải tuân thủ nghiêm ngặt **Decision-First Layout** sau để tối ưu hóa việc quét thông tin (scanning) và ra quyết định.
+
+**Cấu trúc Layout chuẩn:**
+
+`# [Artifact Title]` (VD: Implementation Plan, Architecture Review)
+
+`## Status`
+Hiển thị trạng thái nổi bật nhất và một câu ngắn gọn hướng dẫn hành động tiếp theo.
+VD: ⏳ Waiting for User Approval. "Review this plan before implementation begins."
+
+`## Executive Summary`
+Tối ưu cho việc quét nhanh, tuyệt đối không dùng đoạn văn dài. Sử dụng 3 trường:
+- **Objective:** (Mục tiêu)
+- **Why:** (Lý do)
+- **Expected Outcome:** (Kết quả mong đợi)
+
+`## Change Impact`
+Tóm tắt tác động của thay đổi ngay sau phần Summary:
+- **Scope:** (Phạm vi)
+- **Risk Level:** (Mức độ rủi ro)
+- **Files Modified:** (Số lượng file sửa)
+- **Files Created:** (Số lượng file tạo mới)
+- **Files Deleted:** (Số lượng file xóa)
+- **Modules Affected:** (Các module bị ảnh hưởng)
+- **Architecture Impact:** (Tác động tới kiến trúc)
+
+`## User Decision Required`
+Giải thích lý do cần phê duyệt và đưa ra các lựa chọn rõ ràng:
+- **Approve:** (Đồng ý)
+- **Request Changes:** (Yêu cầu thay đổi)
+- **Reject:** (Từ chối)
+
+`## Open Questions`
+(Chỉ thêm nếu có câu hỏi cần người dùng làm rõ. Bỏ qua nếu rỗng).
+
+`## Proposed Changes` (Hoặc nội dung cốt lõi của Artifact)
+Nhóm theo module/project. Đối với mỗi file, trình bày:
+- **Purpose:** (Mục đích)
+- **Modification Type:** (Loại thay đổi)
+- **Reason:** (Lý do)
+- **Expected Result:** (Kết quả dự kiến)
+
+`## Verification Plan`
+- `### Automated Validation`
+- `### Manual Validation`
+
+`## Metadata`
+Đẩy toàn bộ thông tin Metadata (thông tin thứ cấp) xuống dưới cùng của tài liệu dưới dạng bullet list hoặc markdown table.
 - **Artifact Type:** [Loại]
 - **Execution Mode:** [Mode]
 - **Approval Level:** [Cấp độ]
 - **Status:** [Trạng thái State Machine]
 - **Created Time:** [Thời gian tạo]
-
-**Cấu trúc Layout chuẩn (Artifact Template Registry):**
-`# Title`
-`## Executive Summary`
-`## Details`
-`## Validation`
-`## Status` (Hiển thị trạng thái ở Footer, VD: ⏳ Waiting for User Approval)
 
 ## 11. Standard Chat Notification Templates
 Chuẩn hóa mọi thông báo Chat (Bằng tiếng Việt):
