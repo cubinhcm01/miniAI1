@@ -3,7 +3,7 @@
 This map defines the known structure of `miniAI1`. Use this to target file reads without scanning the entire workspace.
 
 ```text
-/c:/Users/kaybe/OneDrive/Máy tính/miniAI1/
+miniAI1/
 ├── .agents/                      # Agent Operating System (Context, Skills, Intelligence)
 ├── src/                          # Source Code Root
 │   ├── MiniAI.Api/               # Presentation Layer (API endpoints, controllers)
