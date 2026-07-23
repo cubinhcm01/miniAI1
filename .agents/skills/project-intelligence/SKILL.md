@@ -21,6 +21,13 @@ Toàn bộ tri thức động (dynamic knowledge) được lưu trữ trong `.ag
 - **Repository Health:** Đánh giá tech debt, tight coupling, và rủi ro kiến trúc trước khi triển khai.
 - **Session Snapshots:** Lịch sử các phiên làm việc trước đó. Sử dụng thay vì quét `git log`.
 
+## Repository Convention Registry
+Nơi lưu trữ và quản lý các quy ước đã được phát hiện (Project, Folder, File, Namespace, Interface, Naming, Placement, v.v.).
+- **Dữ liệu quy ước cần lưu:** Mỗi quy ước phải đi kèm với Convention Confidence (Độ tự tin), Convention Source (Nguồn), Discovery Date (Ngày khám phá), Last Validation (Lần xác thực cuối), Current Status (Trạng thái hiện tại), Deprecated Status (Trạng thái loại bỏ), và **Convention Snapshot (Evidence)** (các tạo tác dùng làm bằng chứng, ví dụ `MiniAI.Api`).
+- **Convention Lifecycle:** Quy ước tuân theo vòng đời: `Observed -> Validated -> Registered -> Applied -> Deprecated`. Chỉ quy ước Registered mới được tự động áp dụng. Quy ước Deprecated không được sử dụng lại.
+- **Convention Learning:** Không bao giờ âm thầm định nghĩa lại quy ước. Nếu phát hiện quy ước mới được người dùng duyệt, phải tạo `Project Intelligence Update Proposal` để xin phép đăng ký làm tiêu chuẩn.
+- **Repository Convention Drift Detection:** Khi các mô hình quan sát mới khác biệt đáng kể so với quy ước đã được đăng ký, Agent phải: (1) Tạo `Repository Convention Drift Report`, (2) Tạo đề xuất `Project Intelligence Update Proposal`, (3) Chờ phê duyệt trước khi cập nhật Convention Registry. Tránh việc tự học lại âm thầm khi repository phát triển.
+
 ## Quy trình cập nhật Project Intelligence (Project Intelligence Workflow)
 Khi dự án thay đổi (ví dụ: tạo folder mới, đổi tên dự án), dữ liệu Project Intelligence phải được tiến hóa theo.
 1. **Phát hiện sai lệch (Detect Drift):** Nếu cấu trúc file thực tế khác với Manifest, Repo Map hoặc Context, bạn PHẢI báo cáo "Repository Drift".
