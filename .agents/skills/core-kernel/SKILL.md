@@ -45,8 +45,8 @@ Agent OS tích hợp sẵn Repository Convention Engine để đảm bảo mọi
 - **Phạm vi kích hoạt (Trigger):** Kích hoạt cho mọi thay đổi cấu trúc: Create, Rename, Move, Refactor, Generate (Projects, Modules, Folders, Namespaces, Configuration, Documentation, UI components, v.v.). Không tự động đổi tên các tạo tác hiện có (Smallest Change Policy).
 - **Convention Discovery Budget:** Agent phải suy ra các quy ước bằng cách kiểm tra ít nhất có thể (align với Read Budget). Ưu tiên: (1) Các tạo tác anh em tương tự, (2) Cùng Module, (3) Cùng Layer, (4) Ví dụ trên toàn repository.
 - **Convention Precedence (Thứ tự ưu tiên quy ước):** Xung đột phải được giải quyết theo thứ tự: (1) Hướng dẫn rõ ràng từ người dùng, (2) Quy ước repository đã được phê duyệt, (3) Quy ước module hiện tại, (4) Quy ước repository hiện tại, (5) Quy ước ngôn ngữ / framework, (6) Hành vi mặc định của AI.
-- **Convention Validation:** Bắt buộc xác thực nghiêm ngặt cả bản thân tạo tác và **vị trí** của nó (Placement). Bao gồm: Project name, Namespace, Folder, Placement, Layer, File name, Interface, Feature, Documentation, Configuration.
-- **Convention Validation Report:** Bắt buộc chèn mục `## Repository Convention Validation` vào mọi Implementation Plan. Nếu thất bại, phải tạo cảnh báo `Repository Convention Warning` (lý do vi phạm, quy ước mong đợi, đề xuất sửa đổi) và TẠM DỪNG chờ phê duyệt.
+- **Convention Validation:** Bắt buộc xác thực nghiêm ngặt cả bản thân tạo tác và **vị trí** của nó (Placement). Bao gồm tất cả danh mục: Project, Folder, Placement, Namespace, Layer, File Naming, Interface Naming, Feature Naming, Configuration Naming, Documentation Naming.
+- **Convention Validation Report:** Bắt buộc chèn mục `## Repository Convention Validation` vào mọi Implementation Plan. Định dạng trình bày phải minh bạch, liệt kê rõ Bằng chứng (Evidence), Ma trận xác thực (Validation Matrix) hiển thị cả những mục N/A, và giải thích chi tiết cho Mức độ tự tin (Confidence) cũng như các thay đổi Manifest (xem chi tiết trong Section 11). Nếu thất bại, phải tạo cảnh báo `Repository Convention Warning` và TẠM DỪNG chờ phê duyệt.
 
 ## 5. Trình tự Khởi động Bắt buộc (Mandatory Bootstrap Workflow)
 Mỗi yêu cầu mới PHẢI thực thi chính xác trình tự sau (Không được phép bỏ qua):
@@ -131,6 +131,42 @@ Tóm tắt tác động của thay đổi ngay sau phần Summary:
 - **Modules Affected:** (Các module bị ảnh hưởng)
 - **Architecture Impact:** (Tác động tới kiến trúc)
 
+`## Repository Convention Validation`
+(Bắt buộc đối với Kế hoạch Triển khai có thay đổi cấu trúc/thêm mới)
+Phần này phải đáp ứng các nguyên tắc Transparency, Traceability, Consistency, và Reviewability:
+- **Convention Evidence:** Bắt buộc. Mọi quy ước được suy luận phải liệt kê các tạo tác (artifacts) trong kho lưu trữ làm bằng chứng.
+- **Validation Matrix:** Báo cáo toàn bộ danh mục xác thực (Project, Folder, Placement, Namespace, Layer, File Naming, Interface Naming, Feature Naming, Configuration Naming, Documentation Naming). Nếu không áp dụng, hiển thị `N/A`.
+- **Confidence Explanation:** Bắt buộc giải thích lý do chọn mức độ tự tin (High, Medium, Low).
+- **Manifest Changes:** Mọi đề xuất thay đổi Manifest phải có lý do rõ ràng (tại sao, bắt buộc hay tùy chọn, tác động).
+Bố cục bắt buộc:
+> **Convention**
+> `<Tên quy ước>`
+> 
+> **Evidence**
+> `✓ <Bằng chứng 1>`
+> `✓ <Bằng chứng 2>`...
+> 
+> **Validation Matrix**
+> - Project: `<Giá trị> hoặc N/A`
+> - Folder: `<Giá trị> hoặc N/A`
+> - Placement: `<Giá trị> hoặc N/A`
+> - Namespace: `<Giá trị> hoặc N/A`
+> - Layer: `<Giá trị> hoặc N/A`
+> - File Naming: `<Giá trị> hoặc N/A`
+> - Interface Naming: `<Giá trị> hoặc N/A`
+> - Feature Naming: `<Giá trị> hoặc N/A`
+> - Configuration Naming: `<Giá trị> hoặc N/A`
+> - Documentation Naming: `<Giá trị> hoặc N/A`
+> 
+> **Manifest Changes**
+> `<Giải thích lý do thay đổi> hoặc N/A`
+> 
+> **Confidence**
+> `<High/Medium/Low>`
+> 
+> **Reason**
+> `<Giải thích lý do tự tin>`
+
 `## User Decision Required`
 Giải thích lý do cần phê duyệt và đưa ra các lựa chọn rõ ràng:
 - **Approve:** (Đồng ý)
@@ -139,6 +175,7 @@ Giải thích lý do cần phê duyệt và đưa ra các lựa chọn rõ ràng
 
 `## Open Questions`
 (Chỉ thêm nếu có câu hỏi cần người dùng làm rõ. Bỏ qua nếu rỗng).
+**Quy tắc:** Chỉ đặt câu hỏi nếu nó ảnh hưởng thực sự đến việc triển khai. Không hardcode phần triển khai khi đang yêu cầu người dùng lựa chọn (không mâu thuẫn với Kế hoạch).
 
 `## Proposed Changes` (Hoặc nội dung cốt lõi của Artifact)
 Nhóm theo module/project. Đối với mỗi file, trình bày:

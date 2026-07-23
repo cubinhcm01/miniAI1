@@ -7,3 +7,7 @@ At the start of every session, you MUST immediately read and follow the instruct
 `.agents/rules/agent-os-bootstrap.md`
 
 This is your Always-On Bootloader. It will verify your environment and delegate execution to the Core Kernel. Do not bypass the bootloader.
+
+## Acceptance Test Quality Standard
+Before adding or modifying any Acceptance Test, you MUST evaluate the test against the quality standards defined in:
+`.agents/rules/acceptance-test-standard.md`
